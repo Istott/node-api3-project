@@ -1,9 +1,28 @@
 const express = require('express');
-// const morgan = require("morgan");
+const morgan = require("morgan");
 
-// const hubsRouter = require("./hubs/hubs-router.js");
+const postRouter = require("./posts/postRouter.js");
+const userRouter = require("./users/userRouter.js");
 
 const server = express();
+
+// function theGateKeeper(req, res, next) {
+//   const seconds = new Date().getSeconds();
+
+//   if (seconds % 3 === 0) {
+//     res.status(403).json({ you: "cannot pass!" });
+//   } else {
+//     next();
+//   }
+// }
+
+// server.use(theGateKeeper);
+// server.use(requiresAuth);
+server.use(morgan("dev"));
+server.use(express.json()); // built in middleware
+
+server.use("/api/posts", postRouter);
+server.use("/api/users", userRouter);
 
 server.get('/', (req, res) => {
   res.send(`<h2>Let's write some middleware!</h2>`);
