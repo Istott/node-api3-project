@@ -43,15 +43,19 @@ router.post('/', validateUser, (req, res) => {
 
 router.post('/:id/posts', validatePost, (req, res) => {
   // do your magic!
-  Posts.insert(req.body)
+  const body = req.body;
+  body.user_id = req.params.id
+
+  Posts.insert(body)
     .then(post => {
       res.status(201).json(post)
     })
     .catch(err => {
+      console.log(err),
       res.status(500).json({
         error: "There was an error while saving the comment to the database."
       });
-
+    });
 
   // const { id } = req.params;
   // const comment = { ...req.body, post_id: id };
@@ -82,7 +86,7 @@ router.post('/:id/posts', validatePost, (req, res) => {
   //     res.status(500).json({
   //       error: "There was an error while saving the comment to the database."
   //     });
-    });
+    // });
 });
 
 router.get('/', (req, res) => {
