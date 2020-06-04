@@ -16,6 +16,21 @@ const server = express();
 //   }
 // }
 
+
+// function requiresAuth(req, res, next) {
+//   const { password } = req.headers;
+
+//   if (password) {
+//     if (password === "openSaysMe") {
+//       next();
+//     } else {
+//       res.status(401).json({ error: "wrong password!" });
+//     }
+//   } else {
+//     res.status(400).json({ error: "bad request. no password provided!" });
+//   }
+// }
+
 // server.use(theGateKeeper);
 // server.use(requiresAuth);
 server.use(morgan("dev"));
